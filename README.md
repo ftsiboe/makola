@@ -1,0 +1,126 @@
+Makola - Tools and Workflows for Market Integration Analysis
+================
+Francis Tsiboe
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+<!-- badges: start -->
+
+[![Project Status: Active – Stable and actively
+developed](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![R-CMD-check](https://github.com/ftsiboe/makola/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ftsiboe/makola/actions/workflows/R-CMD-check.yaml)
+[![codecov](https://codecov.io/gh/ftsiboe/makola/graph/badge.svg?token=9AQ8FCCWFP)](https://codecov.io/gh/ftsiboe/makola)
+![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)
+![R \>= 4.1](https://img.shields.io/badge/R-%3E=4.1-blue) [![Contributor
+Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](code_of_conduct.md)
+<!-- badges: end -->
+
+**Acknowledgment:** The views expressed in this repository are solely
+those of the author and do not necessarily reflect the official
+positions or policies of affiliated institutions.
+
+## Overview
+
+**makola** provides tools, workflows, and supporting materials for
+market integration and related analysis. The package is designed to
+support empirical work on price transmission, market comovement,
+cointegration, threshold adjustment, and related nonlinear time-series
+dynamics in paired market data.
+
+The current workflow emphasizes: - simulation of toy market price series
+for tool development and demonstrations, - lag-order selection and
+ordering of market pairs, - unit root and cointegration screening, -
+model selection across linear and threshold specifications, and -
+estimation of selected pairwise integration models.
+
+## Current scope
+
+makola is being developed as a research-oriented toolkit for pairwise
+market integration analysis. At this stage, the package includes
+functions for:
+
+- simulating synthetic market price series with configurable temporal
+  frequency and numbers of integrated markets,
+- selecting lag order for a pair of series,
+- ordering paired series using Granger-causality evidence,
+- identifying I(1)-consistent deterministic specifications,
+- testing pairwise cointegration using Johansen trace procedures,
+- testing threshold cointegration using the Hansen-Seo framework,
+- testing linearity against threshold alternatives using Hansen-style
+  threshold tests,
+- selecting an integration-based model for a pair of series, and
+- estimating linear and threshold VECM/VARDL-style models.
+
+## Main workflow
+
+A typical workflow is:
+
+1.  Prepare or simulate a pair of market price series.
+2.  Select the lag order for the pair.
+3.  Screen for integration and cointegration properties.
+4.  Test for linear versus threshold adjustment.
+5.  Select an appropriate integration-based model.
+6.  Estimate the selected model, allowing fallback to simpler nested
+    specifications when needed.
+
+## Example
+
+``` r
+toy_data <- simulate_market_prices(
+  start_date = "2000-01-01",
+  end_date = Sys.Date(),
+  frequency = "month",
+  n_markets = 2,
+  n_integrated_markets = 2,
+  seed = 123,
+  output = "wide"
+)
+
+res <- estimate_pair_integration_model(
+  pair = c("market_1", "market_2"),
+  data = toy_data,
+  nboot = 100,
+  lag.max = 4,
+  lag.opt = 2,
+  trim = 0.10
+)
+
+res$model
+res$est
+```
+
+## Installation
+
+You can install the development version from GitHub with:
+
+``` r
+# install.packages("remotes")
+remotes::install_github("ftsiboe/makola")
+```
+
+## Development notes
+
+This repository is under active development. Function names, arguments,
+output structures, and estimation workflows may continue to evolve as
+the package is expanded and standardized.
+
+Planned improvements include: - additional diagnostics and summary
+tools, - broader support for pairwise and multi-market workflows, -
+improved estimation wrappers and reporting utilities, and - worked
+examples and vignettes for empirical applications.
+
+## Contributing
+
+Constructive feedback, bug reports, and research collaborations are
+highly appreciated. Contributions that improve documentation, testing,
+estimation workflows, and reproducible examples are especially welcome.
+
+Please use the GitHub issue tracker to report bugs or suggest
+enhancements.
+
+## Contact
+
+Francis Tsiboe  
+Email: <ftsiboe@hotmail.com>

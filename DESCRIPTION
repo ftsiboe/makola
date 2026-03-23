@@ -1,0 +1,22 @@
+Package: makola
+Type: Package
+Title: Tools and Workflows for Market Integration Analysis
+Version: 0.0.0.9000
+Author: Francis Tsiboe [aut, cre] (<https://orcid.org/0000-0001-5984-1072>)
+Maintainer: Francis Tsiboe <ftsiboe@hotmail.com>
+Creator: Francis Tsiboe
+Description: makola provides code, workflows, and supporting
+    materials for market integration and related analysis.
+License: GPL-3 + file LICENSE
+URL: https://github.com/ftsiboe/makola
+BugReports: https://github.com/ftsiboe/makola/issues
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3
+VignetteBuilder: knitr
+Depends: R (>= 4.1.0)
+Imports: 
+Remotes: 
+Suggests: knitr, rmarkdown, testthat (>= 3.0.0), ggplot2, piggyback, car, crayon, data.table, dplyr, lmtest, plyr, systemfit, tidyr, tsDyn, urca
+LazyData: true
+
