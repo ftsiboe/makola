@@ -7,6 +7,6 @@
 # * https://testthat.r-lib.org/articles/special-files.html
 
 library(testthat)
-# library(AgMarketSyncLab)
-# test_check("AgMarketSyncLab")
+library(makola)
+test_check("makola")
 
